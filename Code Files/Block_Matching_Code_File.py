@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 #-------------------------------------------------------------------------------
-#Group Number 9
-#Name : Anvita Upadhyay and Isha Gupta
-#UBName : anvitaup, ishagupt
-#Person Number : 50147506 50208184
-#Title : CSE 573 - Project - Disparity for Stereo Vision – Block Matching
+#Name : Jisu Kim
+#Disparity for Stereo Vision – Block Matching
 #-------------------------------------------------------------------------------
 
 import numpy as np
@@ -13,15 +10,15 @@ from matplotlib import pyplot as plt
 import math
 
 # Loading the original images
-view1 = cv2.imread('E:/Sem 1/CVIP/Project/Data/Data/view1.png',0)
+view1 = cv2.imread('/Users/jace/Jace/dynamic_programming/CVIPProject/Output Images/im2_mean.png',0)
 view1 = np.asarray((view1),dtype = np.float)
 
-view2 = cv2.imread('E:/Sem 1/CVIP/Project/Data/Data/view5.png',0)
+view2 = cv2.imread('/Users/jace/Jace/dynamic_programming/CVIPProject/Output Images/im6_mean.png',0)
 view2 = np.asarray((view2),dtype = np.float)
 
 # Loading the ground truth images
-gndTruth1 = cv2.imread('E:/Sem 1/CVIP/Project/Data/Data/disp1.png',0)
-gndTruth2 = cv2.imread('E:/Sem 1/CVIP/Project/Data/Data/disp5.png',0)
+gndTruth1 = cv2.imread('/Users/jace/Jace/dynamic_programming/CVIPProject/Output Images/dispz2.png',0)
+gndTruth2 = cv2.imread('/Users/jace/Jace/dynamic_programming/CVIPProject/Output Images/dispz6.png',0)
 gndTruth1 = np.asarray((gndTruth1),dtype = np.float)
 gndTruth2 = np.asarray((gndTruth2),dtype = np.float)
 #-------------------------------------------------------------------------------
@@ -49,12 +46,12 @@ def CalculateDisparity(blockSize,image1,image2, gndTruth, viewType):
     elif(blockSize ==9 ):
         initialValue = 4
         
-    print "Processing..."
+    print ("Processing...")
         
     for i in range(initialValue,rows):
 
         if(i%50 == 0):
-            print "Processing row:", i
+            print ("Processing row:", i)
 
         for j in range(initialValue,columns):
             if(blockSize ==3 ):
@@ -124,22 +121,22 @@ def CalculateDisparity(blockSize,image1,image2, gndTruth, viewType):
     #--------------------------------------------------------
     
     MSE = 0.0
-    for i in xrange(gndTruth.shape[0]):
-        for j in xrange(gndTruth.shape[1]):
+    for i in range(gndTruth.shape[0]):
+        for j in range(gndTruth.shape[1]):
             MSE = MSE + math.pow((gndTruth[i][j] - DisparityMap[i][j]), 2)
     MSE = MSE/(gndTruth.shape[0] * gndTruth.shape[1])
     
     if(blockSize == 3):  
         # viewType 1 is for Left to Right and 2 for Right to Left
         if(viewType == 1):
-            print "Mean Square Error for Left view with 3x3 block = %d" %MSE
+            print ("Mean Square Error for Left view with 3x3 block = %d" %MSE)
         else:
-            print "Mean Square Error for Right view with 3x3 block = %d" %MSE            
+            print ("Mean Square Error for Right view with 3x3 block = %d" %MSE)
     else:
         if(viewType == 1):
-            print "Mean Square Error for Left view with 9x9 block = %d" %MSE
+            print ("Mean Square Error for Left view with 9x9 block = %d" %MSE)
         else:
-            print "Mean Square Error for Right view with 9x9 block = %d" %MSE          
+            print ("Mean Square Error for Right view with 9x9 block = %d" %MSE)
 
     return DisparityMap  
 #-------------------------------------------------------------------------------            

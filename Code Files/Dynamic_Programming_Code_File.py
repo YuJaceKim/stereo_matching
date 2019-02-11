@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 #-------------------------------------------------------------------------------
-#Group Number 9
-#Name : Anvita Upadhyay and Isha Gupta
-#UBName : anvitaup, ishagupt
-#Person Number : 50147506 50208184
-#Title : CSE 573 - Project - Disparity for Stereo Vision – Dynamic Programming
+#Name : Jisu Kim
+#Disparity for Stereo Vision – Block Matching
 #-------------------------------------------------------------------------------
 
 import numpy as np
@@ -16,15 +13,15 @@ from matplotlib import pyplot as plt
 def main():
     
     # Loading original left and right images
-    original_Left_Image = cv2.imread("E:/Sem 1/CVIP/Project/Data/Data/view1.png",0)
-    original_Right_Image = cv2.imread("E:/Sem 1/CVIP/Project/Data/Data/view5.png",0)
+    original_Left_Image = cv2.imread("/Users/jace/Jace/dynamic_programming/CVIPProject/Output Images/view1.png",0)
+    original_Right_Image = cv2.imread("/Users/jace/Jace/dynamic_programming/CVIPProject/Output Images/view5.png",0)
     
     leftImage = np.asarray(original_Left_Image, dtype = np.float)
     rightImage = np.asarray(original_Right_Image, dtype = np.float)
     
     # Loading given ground truth images
-    ground_Truth_Left_Image = cv2.imread("E:/Sem 1/CVIP/Project/Data/Data/disp1.png",0)
-    ground_Truth_Right_Image = cv2.imread("E:/Sem 1/CVIP/Project/Data/Data/disp5.png",0)
+    ground_Truth_Left_Image = cv2.imread("/Users/jace/Jace/dynamic_programming/CVIPProject/Output Images/disp1.png",0)
+    ground_Truth_Right_Image = cv2.imread("/Users/jace/Jace/dynamic_programming/CVIPProject/Output Images/disp5.png",0)
     
     ground_Truth_Left = np.asarray(ground_Truth_Left_Image, dtype = np.float)
     ground_Truth_Right = np.asarray(ground_Truth_Right_Image, dtype = np.float)
@@ -44,7 +41,7 @@ def main():
     for row in range(0, rowCount):
     
         if(row%50 == 0):
-            print "Processing row ", row
+            print ("Processing row ", row)
         
         for i in range(1, columnCount):
             costMatrix[i, 0] = i * occlusion
@@ -100,8 +97,8 @@ def main():
     mse_Left = CalculateMSE(disparity_Map_Left, ground_Truth_Left)
     mse_Right = CalculateMSE(disparity_Map_Right, ground_Truth_Right)
     
-    print "Mean Square Error of Left Image : ", mse_Left
-    print "Mean Square Error of Right Image : ", mse_Right    
+    print ("Mean Square Error of Left Image : ", mse_Left)
+    print ("Mean Square Error of Right Image : ", mse_Right)
     
     PlotImages(leftImage, rightImage, disparity_Map_Left, disparity_Map_Right)
 #-------------------------------------------------------------------------------                
